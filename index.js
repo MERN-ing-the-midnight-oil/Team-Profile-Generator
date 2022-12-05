@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const Manager = require("./lib/Manager");
+const fs = require("fs");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
@@ -38,6 +39,7 @@ const managerMaker = () => {
 				response.officeNumber
 			);
 			console.log(manager);
+			managerSnippet(manager); //I want to send "manager" to managerSnippet to create the manager HTML
 		})
 		.then((response) => {
 			membersMenu();
@@ -56,20 +58,16 @@ const membersMenu = () => {
 		.then((response) => {
 			if (response.another == "Engineer") {
 				engineerMaker();
-				//membersMenu(); //
-				// I think I need to await completion of engineerMaker before
 			} else if (response.another == "Intern") {
 				internMaker();
 			} else {
-				console.log("call template Helper");
-
-				// we need membersMenu(); to be an option here but not happen automatically
+				console.log("add a snippet to the HTML");
 			}
 		});
 };
 const engineerMaker = async () => {
-	//added async before the ()
-	await inquirer //added awaid to inquirer.prompt , because I want to wait for that to finish and then go back to the menu
+	//async and await were needed to delay membersMenu from being called
+	await inquirer
 		.prompt([
 			{
 				type: "input",
@@ -101,9 +99,13 @@ const engineerMaker = async () => {
 				response.github
 			);
 			console.log(engineer);
+			//send engineer to engineerSnippet
+			engineerSnippet(engineer);
 		});
-	membersMenu(); //takes us back to the menu afer new Engineer
+
+	membersMenu();
 };
+
 const internMaker = async () => {
 	await inquirer
 		.prompt([
@@ -137,8 +139,50 @@ const internMaker = async () => {
 				response.school
 			);
 			console.log(intern);
+			//execute a function that adds an intern card to the HTML
 		});
 	membersMenu(); //takes us back to the menu
 };
 
-managerMaker();
+managerMaker(); //this starts off the applicaiton by asking the user for manager information.
+
+//HTML SNIPPETS
+//I'd like to append some new HTML to the index.html file using a function
+//maybe I could use "simple string operations" ie.e. slice and concat as described here
+//https://stackoverflow.com/questions/44127153/how-to-append-a-code-snippet-to-html-using-node-fs
+const managerSnippet = (manager) => {
+	`<div class="card" style="width: 18rem;">
+<img class="card-img-top" src="..." alt="Card image cap">
+<div class="card-body">
+  <h5 class="card-title">Manager</h5>
+  <p class="card-text">Name: ${manager.name}</p>
+</div>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">Email: ${manager.email}</li>
+  <li class="list-group-item">ID: ${manager.id}</li>
+  <li class="list-group-item">Office Number: ${manager.officeNumber}</li>
+</ul>
+<div class="card-body">
+  <a href="#" class="card-link">Card link</a>
+  <a href="#" class="card-link">Another link</a>
+</div>
+</div>`;
+};
+const engineerSnippet = (engineer) => {
+	`<div class="card" style="width: 18rem;">
+<img class="card-img-top" src="..." alt="Card image cap">
+<div class="card-body">
+  <h5 class="card-title">Manager</h5>
+  <p class="card-text">Name: ${engineer.name}</p>
+</div>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">Email: ${engineer.email}</li>
+  <li class="list-group-item">ID: ${engineer.id}</li>
+  <li class="list-group-item">Office Number: ${engineer.github}</li>
+</ul>
+<div class="card-body">
+  <a href="#" class="card-link">Card link</a>
+  <a href="#" class="card-link">Another link</a>
+</div>
+</div>`;
+};
