@@ -52,8 +52,8 @@ const membersMenu = () => {
 			{
 				type: "list",
 				name: "another",
-				message: "Would you like to add an Engineer or Intern?",
-				choices: ["Engineer", "Intern", "No"],
+				message: "Would you like to add an Engineer or Intern to the team?",
+				choices: ["Engineer", "Intern", "Nope, I'm all done!"],
 			},
 		])
 		.then((response) => {
