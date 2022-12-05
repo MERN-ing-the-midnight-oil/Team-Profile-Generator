@@ -1,9 +1,9 @@
 const inquirer = require("inquirer");
-const Manager = require("./lib/Manager");
 const fs = require("fs");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-
+const Manager = require("./lib/Manager");
+const teamArray = [];
 const managerMaker = () => {
 	inquirer
 		.prompt([
@@ -39,7 +39,8 @@ const managerMaker = () => {
 				response.officeNumber
 			);
 			console.log(manager);
-			managerSnippet(manager); //I want to send "manager" to managerSnippet to create the manager HTML
+			teamArray.push(manager); //send the new manager object to the presently empty team array
+			console.log(teamArray);
 		})
 		.then((response) => {
 			membersMenu();
@@ -61,7 +62,7 @@ const membersMenu = () => {
 			} else if (response.another == "Intern") {
 				internMaker();
 			} else {
-				console.log("add a snippet to the HTML");
+				console.log("Tell template Helper to make the HTML file now");
 			}
 		});
 };
@@ -98,9 +99,8 @@ const engineerMaker = async () => {
 				response.engineerEmail,
 				response.github
 			);
-			console.log(engineer);
-			//send engineer to engineerSnippet
-			engineerSnippet(engineer);
+			teamArray.push(engineer); //add the new engineer to the team roster
+			console.log(teamArray);
 		});
 
 	membersMenu();
@@ -138,51 +138,10 @@ const internMaker = async () => {
 				response.internEmail,
 				response.school
 			);
-			console.log(intern);
-			//execute a function that adds an intern card to the HTML
+			teamArray.push(intern); //add the intern to the team roster
+			console.log(teamArray);
 		});
 	membersMenu(); //takes us back to the menu
 };
 
-managerMaker(); //this starts off the applicaiton by asking the user for manager information.
-
-//HTML SNIPPETS
-//I'd like to append some new HTML to the index.html file using a function
-//maybe I could use "simple string operations" ie.e. slice and concat as described here
-//https://stackoverflow.com/questions/44127153/how-to-append-a-code-snippet-to-html-using-node-fs
-const managerSnippet = (manager) => {
-	`<div class="card" style="width: 18rem;">
-<img class="card-img-top" src="..." alt="Card image cap">
-<div class="card-body">
-  <h5 class="card-title">Manager</h5>
-  <p class="card-text">Name: ${manager.name}</p>
-</div>
-<ul class="list-group list-group-flush">
-  <li class="list-group-item">Email: ${manager.email}</li>
-  <li class="list-group-item">ID: ${manager.id}</li>
-  <li class="list-group-item">Office Number: ${manager.officeNumber}</li>
-</ul>
-<div class="card-body">
-  <a href="#" class="card-link">Card link</a>
-  <a href="#" class="card-link">Another link</a>
-</div>
-</div>`;
-};
-const engineerSnippet = (engineer) => {
-	`<div class="card" style="width: 18rem;">
-<img class="card-img-top" src="..." alt="Card image cap">
-<div class="card-body">
-  <h5 class="card-title">Manager</h5>
-  <p class="card-text">Name: ${engineer.name}</p>
-</div>
-<ul class="list-group list-group-flush">
-  <li class="list-group-item">Email: ${engineer.email}</li>
-  <li class="list-group-item">ID: ${engineer.id}</li>
-  <li class="list-group-item">Office Number: ${engineer.github}</li>
-</ul>
-<div class="card-body">
-  <a href="#" class="card-link">Card link</a>
-  <a href="#" class="card-link">Another link</a>
-</div>
-</div>`;
-};
+managerMaker(); //this starts off the app by asking the user for manager information.
