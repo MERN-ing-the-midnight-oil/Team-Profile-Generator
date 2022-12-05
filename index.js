@@ -40,10 +40,10 @@ const managerMaker = () => {
 			console.log(manager);
 		})
 		.then((response) => {
-			moreMembers();
+			membersMenu();
 		});
 };
-const moreMembers = () => {
+const membersMenu = () => {
 	inquirer
 		.prompt([
 			{
@@ -56,13 +56,14 @@ const moreMembers = () => {
 		.then((response) => {
 			if (response.another == "Engineer") {
 				engineerMaker();
-				//moreMembers(); //
-				// we need moreMembers(); to be an option here but not happen automatically
+				//membersMenu(); //
+				// I think I need to await completion of engineerMaker before
 			} else if (response.another == "Intern") {
 				internMaker();
 			} else {
 				console.log("call template Helper");
-				// we need moreMembers(); to be an option here but not happen automatically
+
+				// we need membersMenu(); to be an option here but not happen automatically
 			}
 		});
 };
