@@ -67,8 +67,9 @@ const membersMenu = () => {
 			}
 		});
 };
-const engineerMaker = () => {
-	inquirer
+const engineerMaker = async () => {
+	//added async before the ()
+	await inquirer //added awaid to inquirer.prompt , because I want to wait for that to finish and then go back to the menu
 		.prompt([
 			{
 				type: "input",
@@ -101,9 +102,10 @@ const engineerMaker = () => {
 			);
 			console.log(engineer);
 		});
+	membersMenu(); //takes us back to the menu afer new Engineer
 };
-const internMaker = () => {
-	inquirer
+const internMaker = async () => {
+	await inquirer
 		.prompt([
 			{
 				type: "input",
@@ -136,6 +138,7 @@ const internMaker = () => {
 			);
 			console.log(intern);
 		});
+	membersMenu(); //takes us back to the menu
 };
 
 managerMaker();
