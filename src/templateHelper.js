@@ -10,15 +10,6 @@ const makeTeamHtml = (teamArray) => {
 			return internSnippetMaker(member);
 		}
 	});
-	//writeHTML
-};
-
-const writeHTML = () => {
-	//Probably don't need this, since it is in index.js
-	fs.writeFile("index.html", makeTeamHtml, function (err) {
-		if (err) throw err;
-		console.log("open index.html to see your team!");
-	});
 };
 
 const managerSnippetMaker = (manager) => {
@@ -76,27 +67,5 @@ const internSnippetMaker = (intern) => {
 </div>`;
 };
 
-// <div class="card" style="width: 18rem;">
-//     <img class="card-img-top" src="..." alt="Card image cap">
-//     <div class="card-body">
-//       <h5 class="card-title">Card title</h5>
-//       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-//     </div>
-//     <ul class="list-group list-group-flush">
-//       <li class="list-group-item">Cras justo odio</li>
-//       <li class="list-group-item">Dapibus ac facilisis in</li>
-//       <li class="list-group-item">Vestibulum at eros</li>
-//     </ul>
-//     <div class="card-body">
-//       <a href="#" class="card-link">Card link</a>
-//       <a href="#" class="card-link">Another link</a>
-//     </div>
-//   </div>
-
-//  call  fs.writeFileSync, push the array of  team members, then for each instance of a team member, a
-//snippet will be created for them depending on their Class.
-
-//maybe I could use "simple string operations" i.e. slice and concat as described here
-//https://stackoverflow.com/questions/44127153/how-to-append-a-code-snippet-to-html-using-node-fs
 module.exports = makeTeamHtml;
 module.exports.writeHTML;
