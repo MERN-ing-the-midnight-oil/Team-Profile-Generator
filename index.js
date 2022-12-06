@@ -3,6 +3,7 @@ const fs = require("fs");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
+const makeTeamHtml = require("./src/templateHelper");
 const teamArray = [];
 const managerMaker = () => {
 	inquirer
@@ -62,7 +63,12 @@ const membersMenu = () => {
 			} else if (response.another == "Intern") {
 				internMaker();
 			} else {
-				console.log("Tell template Helper to make the HTML file now");
+				console.log(
+					"Tell template Helper to make the HTML file now",
+					teamArray
+				);//makeTeamHtml was imported from template helper
+				const result = makeTeamHtml(teamArray);//wer're finished collecting teamArray (user input)
+				console.log("result", result);
 			}
 		});
 };
@@ -100,7 +106,6 @@ const engineerMaker = async () => {
 				response.github
 			);
 			teamArray.push(engineer); //add the new engineer to the team roster
-			console.log(teamArray);
 		});
 
 	membersMenu();
@@ -139,7 +144,6 @@ const internMaker = async () => {
 				response.school
 			);
 			teamArray.push(intern); //add the intern to the team roster
-			console.log(teamArray);
 		});
 	membersMenu(); //takes us back to the menu
 };

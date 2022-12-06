@@ -1,27 +1,18 @@
-const theTeamArray = require("../index.js").teamArray; //is this syntax... correct?
-
-const generateWholePage = () => {//takes the conglomeration of cards HTML (put together in allCards) and puts them
-//into the body of what will become main.html
-	`
-	<!DOCTYPE html>
-	<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>My Team</title>
-	</head>
-${allCards};
-	<body>
-	`//<---ending backtick
-}
-
-
-const generateAllCards() => {
-//for each item in theTeamArray, if item is a manager, send manager to managerSnippetMaker, otherwise if item is
-// an engineer, send engineer to engineerSnippetMaker, if item is an intern, send item to internSnippetMaker.
-//can I call managerSnippetMaker on a manager item here, within generateAllCards?
-}
+// teamArray contains an array of newly created employees
+const makeTeamHtml = (teamArray) => {
+	//makeTeamHtml receives the teamArray
+	return teamArray.map((member) => {
+		//and does the following to each index of the array.
+		if (member.getRole() === "Manager") {
+			return managerSnippetMaker(member);
+		} else if (member.getRole() === "Engineer") {
+			return engineerSnippetMaker(member);
+		} else if (member.getRole() === "Intern") {
+			return internSnippetMaker(member);
+		}
+		//return `<p class="card-text">Name: ${member.name}</p>`; //should end up with an array of p tags
+	});
+};
 
 const managerSnippetMaker = (manager) => {
 	`<div class="card" style="width: 18rem;">
@@ -95,8 +86,9 @@ const internSnippetMaker = (intern) => {
 //     </div>
 //   </div>
 
-//  call  fs.writeFileSync, push the array of  team members, then for each instance of a team member, a 
+//  call  fs.writeFileSync, push the array of  team members, then for each instance of a team member, a
 //snippet will be created for them depending on their Class.
 
 //maybe I could use "simple string operations" i.e. slice and concat as described here
 //https://stackoverflow.com/questions/44127153/how-to-append-a-code-snippet-to-html-using-node-fs
+module.exports = makeTeamHtml;
