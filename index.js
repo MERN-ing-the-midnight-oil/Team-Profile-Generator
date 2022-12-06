@@ -5,6 +5,14 @@ const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 const makeTeamHtml = require("./src/templateHelper");
 const teamArray = [];
+
+const writeHTML = () => {
+	fs.writeFile("index.html", makeTeamHtml, function (err) {
+		if (err) throw err;
+		console.log("open index.html to see your team!");
+	});
+};
+
 const managerMaker = () => {
 	inquirer
 		.prompt([
@@ -66,9 +74,10 @@ const membersMenu = () => {
 				console.log(
 					"Tell template Helper to make the HTML file now",
 					teamArray
-				);//makeTeamHtml was imported from template helper
-				const result = makeTeamHtml(teamArray);//wer're finished collecting teamArray (user input)
+				); //makeTeamHtml was imported from template helper
+				const result = makeTeamHtml(teamArray); //wer're finished collecting teamArray (user input)
 				console.log("result", result);
+				writeHTML();
 			}
 		});
 };

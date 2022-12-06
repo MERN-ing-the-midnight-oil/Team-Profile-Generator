@@ -1,8 +1,6 @@
-// teamArray contains an array of newly created employees
+const fs = require("fs");
 const makeTeamHtml = (teamArray) => {
-	//makeTeamHtml receives the teamArray
-	return teamArray.map((member) => {
-		//and does the following to each index of the array.
+	return JSON.stringify(teamArray.map((member) => { //I would love to stringify the teamArray.map, HOW??
 		if (member.getRole() === "Manager") {
 			return managerSnippetMaker(member);
 		} else if (member.getRole() === "Engineer") {
@@ -10,12 +8,19 @@ const makeTeamHtml = (teamArray) => {
 		} else if (member.getRole() === "Intern") {
 			return internSnippetMaker(member);
 		}
-		//return `<p class="card-text">Name: ${member.name}</p>`; //should end up with an array of p tags
+	});
+	//writeHTML
+};
+
+const writeHTML = () => {
+	fs.writeFile("index.html", makeTeamHtml, function (err) {
+		if (err) throw err;
+		console.log("open index.html to see your team!");
 	});
 };
 
 const managerSnippetMaker = (manager) => {
-	`<div class="card" style="width: 18rem;">
+	return `<div class="card" style="width: 18rem;">
 <img class="card-img-top" src="..." alt="Card image cap">
 <div class="card-body">
   <h5 class="card-title">Manager</h5>
@@ -33,7 +38,7 @@ const managerSnippetMaker = (manager) => {
 </div>`;
 };
 const engineerSnippetMaker = (engineer) => {
-	`<div class="card" style="width: 18rem;">
+	return `<div class="card" style="width: 18rem;">
 <img class="card-img-top" src="..." alt="Card image cap">
 <div class="card-body">
   <h5 class="card-title">Manager</h5>
@@ -51,7 +56,7 @@ const engineerSnippetMaker = (engineer) => {
 </div>`;
 };
 const internSnippetMaker = (intern) => {
-	`<div class="card" style="width: 18rem;">
+	return `<div class="card" style="width: 18rem;">
 <img class="card-img-top" src="..." alt="Card image cap">
 <div class="card-body">
   <h5 class="card-title">Manager</h5>
@@ -92,3 +97,4 @@ const internSnippetMaker = (intern) => {
 //maybe I could use "simple string operations" i.e. slice and concat as described here
 //https://stackoverflow.com/questions/44127153/how-to-append-a-code-snippet-to-html-using-node-fs
 module.exports = makeTeamHtml;
+module.exports.writeHTML;
