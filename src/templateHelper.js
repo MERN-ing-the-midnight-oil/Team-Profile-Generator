@@ -1,6 +1,7 @@
 const fs = require("fs");
 const makeTeamHtml = (teamArray) => {
-	return JSON.stringify(teamArray.map((member) => { //I would love to stringify the teamArray.map, HOW??
+	return teamArray.map((member) => {
+		//I would love to stringify the teamArray.map, since JS doesnt want to writeFile with this array HOW??
 		if (member.getRole() === "Manager") {
 			return managerSnippetMaker(member);
 		} else if (member.getRole() === "Engineer") {
@@ -13,6 +14,7 @@ const makeTeamHtml = (teamArray) => {
 };
 
 const writeHTML = () => {
+	//Probably don't need this, since it is in index.js
 	fs.writeFile("index.html", makeTeamHtml, function (err) {
 		if (err) throw err;
 		console.log("open index.html to see your team!");
