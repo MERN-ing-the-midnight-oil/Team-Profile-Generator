@@ -7,7 +7,7 @@ const makeTeamHtml = require("./src/templateHelper");
 const teamArray = [];
 
 const writeHtmlFile = () => {
-	fs.writeFileSync(index.html, makeTeamHtml(teamArray), "utf-8");
+	fs.writeFileSync("index.html", makeTeamHtml(), "utf-8");
 };
 
 const managerMaker = () => {
