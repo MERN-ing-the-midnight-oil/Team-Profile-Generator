@@ -70,11 +70,3 @@ const internSnippetMaker = (intern) => {
 
 module.exports = makeTeamHtml;
 module.exports.writeHTML;
-
-// 1. Inside the makeTeamHtml in templateHelper.js, I could create a new variable (something like teamHTml) and set it equal to an empty array.
-
-// 2. Remove the return statement in front of teamArray.map --we want to perform these actions on the teamArray array, but not return them just yet.
-
-// 3. Then, for each conditional, instead of returning the results of each SnippetMaker function, just push those results into the teamHtml array.
-
-// 4. After the mapping is done, return the teamHtml array, but with .join() --> return teamHtml.join(). That will join all the items of the array together into one string and it won't be an array anymore.
