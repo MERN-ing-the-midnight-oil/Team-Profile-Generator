@@ -1,17 +1,20 @@
 const fs = require("fs");
-const makeTeamHtml = (teamArray) => {
-	teamHtml = [];
-	teamArray.map((member) => {
+function makeTeamHtml(data) {
+	//data is a variable within this function declaration only
+	console.log(4, data, 4);
+	console.log(data[0].getRole());
+	teamCardsHtml = [];
+	data.map((member) => {
 		if (member.getRole() === "Manager") {
-			teamHtml.push(managerSnippetMaker(member));
+			teamCardsHtml.push(managerSnippetMaker(member));
 		} else if (member.getRole() === "Engineer") {
-			teamHtml.push(engineerSnippetMaker(member));
+			teamCardsHtml.push(engineerSnippetMaker(member));
 		} else if (member.getRole() === "Intern") {
-			teamHtml.push(internSnippetMaker(member));
+			teamCardsHtml.push(internSnippetMaker(member));
 		}
-		return teamHtml.join(); // this shold join all the items of the array together into one string and it won't be an array anymore so that fs.writeFileSync can use the data.
 	});
-};
+	return teamCardsHtml.join(""); // this shold join all the items of the array together into one string and it won't be an array anymore so that fs.writeFileSync can use the data.
+}
 
 const managerSnippetMaker = (manager) => {
 	return `<div class="card" style="width: 18rem;">
@@ -69,4 +72,4 @@ const internSnippetMaker = (intern) => {
 };
 
 module.exports = makeTeamHtml;
-module.exports.writeHTML;
+// module.exports.writeHTML;

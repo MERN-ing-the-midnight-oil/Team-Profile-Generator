@@ -7,7 +7,9 @@ const makeTeamHtml = require("./src/templateHelper");
 const teamArray = [];
 
 const writeHtmlFile = () => {
-	fs.writeFileSync("index.html", makeTeamHtml(), "utf-8");
+	console.log(10, teamArray, 10);
+	console.log(11, makeTeamHtml(teamArray), 11);
+	fs.writeFileSync("index.html", makeTeamHtml(teamArray), "utf-8");
 };
 
 const managerMaker = () => {
@@ -44,9 +46,7 @@ const managerMaker = () => {
 				response.managerEmail,
 				response.officeNumber
 			);
-			console.log(manager);
 			teamArray.push(manager); //send the new manager object to the presently empty team array
-			console.log(teamArray);
 		})
 		.then((response) => {
 			membersMenu();
@@ -68,7 +68,7 @@ const membersMenu = () => {
 			} else if (response.another == "Intern") {
 				internMaker();
 			} else {
-				writeHtmlFile();
+				writeHtmlFile(); //!!!!
 			}
 		});
 };
