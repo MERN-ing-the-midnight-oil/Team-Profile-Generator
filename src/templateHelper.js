@@ -47,7 +47,7 @@ const managerSnippetMaker = (manager) => {
   <p class="card-text">Name: ${manager.name}</p>
 </div>
 <ul class="list-group list-group-flush">
-  <li class="list-group-item">Email: ${manager.email}</li>
+  <li class="list-group-item"><address>Email:<a href="mailto:${manager.email}">${manager.email}</a></address> </li>
   <li class="list-group-item">ID: ${manager.id}</li>
   <li class="list-group-item">Office Number: ${manager.officeNumber}</li>
 </ul>
@@ -66,9 +66,9 @@ const engineerSnippetMaker = (engineer) => {
   <p class="card-text">Name: ${engineer.name}</p>
 </div>
 <ul class="list-group list-group-flush">
-  <li class="list-group-item">Email: ${engineer.email}</li>
+  <li class="list-group-item">Email:<a href="mailto:${engineer.email}">${engineer.email}</a> </li>
   <li class="list-group-item">ID: ${engineer.id}</li>
-  <li class="list-group-item">Github username: ${engineer.github}</li>
+  <li class="list-group-item">Github username: <a href="https://github.com/${engineer.github}/">${engineer.github}</a></li>
 </ul>
 <div class="card-body">
   <a href="#" class="card-link">Card link</a>
@@ -85,7 +85,7 @@ const internSnippetMaker = (intern) => {
   <p class="card-text">Name: ${intern.name}</p>
 </div>
 <ul class="list-group list-group-flush">
-  <li class="list-group-item">Email: ${intern.email}</li>
+  <li class="list-group-item">Email:<a href="mailto:${intern.email}">${intern.email}</a> </li>
   <li class="list-group-item">ID: ${intern.id}</li>
   <li class="list-group-item">Academic Institution: ${intern.school}</li>
 </ul>

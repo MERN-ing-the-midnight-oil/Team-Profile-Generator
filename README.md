@@ -20,7 +20,7 @@
 
 ## Description
 
-### This is a command-line application that takes in information about emploees on a software engineering team, then generates an HTML webpage that displays supparies for each person.
+### This is a command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person.
 
 [Video Walk-Through](https://drive.google.com/file/d/1c3wp8yTEpzewPDxVYeYW8Qz9CZcgKyet/view)
 
